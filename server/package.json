@@ -20,12 +20,13 @@
   },
   "homepage": "https://github.com/Mellocay/around-express#readme",
   "dependencies": {
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1"
   },
   "devDependencies": {
     "eslint": "^7.14.0",
-    "nodemon": "^2.0.6"
+    "eslint-plugin-react": "^7.21.5",
+    "nodemon": "^2.0.6",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
   }
 }
