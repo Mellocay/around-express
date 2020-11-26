@@ -1,7 +1,8 @@
 const path = require('path');
+const getFileContent = require('../helpers/getFileContent');
 
 const cardDataPath = path.join(__dirname, '..', 'data', 'cardData.json');
-const getFileContent = require('../helpers/getFileContent');
+
 
 function getCards(req, res) {
   return getFileContent(cardDataPath)
@@ -11,5 +12,5 @@ function getCards(req, res) {
 }
 
 module.exports = {
-  getCards,
+  getCards
 };
