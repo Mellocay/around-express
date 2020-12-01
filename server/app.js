@@ -7,6 +7,7 @@ const userRouter = require('./routers/users');
 const cardRouter = require('./routers/cards');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/', userRouter);
 app.use('/', cardRouter);
 
