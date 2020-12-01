@@ -11,15 +11,18 @@ function getUsers(req, res) {
     .catch((err) => res.status(500).send(err));
 }
 
-const getOneUser = (req, res) => getFileContent(userDataPath)
-  .then((users) => users.friends.find((user) => user._id === req.params.id))
-  .then((user) => {
-    if (user) {
-      return res.status(200).send(user);
-    }
-    res.status(404).send({ message: 'User ID not found' });
-  })
-  .catch((err) => res.status(500).send(err));
+function getOneUser(req, res) {
+  return getFileContent(userDataPath)
+    .then((users) => {
+      const user = users.friends.find((user) => user._id === req.params.id);
+
+      if (user) {
+        return res.status(200).send(user);
+      }
+      return res.status(404).send({ message: 'user not found' });
+    })
+    .catch((err) => res.status(500).send(err));
+}
 
 module.exports = {
   getUsers,
