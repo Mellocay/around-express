@@ -6,7 +6,10 @@ const cardDataPath = path.join(__dirname, '..', 'data', 'cardData.json');
 function getCards(req, res) {
   return getFileContent(cardDataPath)
     .then((cards) => {
-      res.status(200).send(cards)})
+      /* eslint-disable */
+      res.status(200).send(cards)
+    })
+    /* eslint-enable */
     .catch((err) => res.status(500).send(err));
 }
 
