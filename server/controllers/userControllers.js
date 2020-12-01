@@ -14,7 +14,7 @@ function getUsers(req, res) {
 function getOneUser(req, res) {
   return getFileContent(userDataPath)
     .then((users) => {
-      const user = users.friends.find((user) => user._id === req.params.id);
+      const user = users.find((user) => user._id === req.params.id);
 
       if (user) {
         return res.status(200).send(user);
