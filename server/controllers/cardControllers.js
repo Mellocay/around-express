@@ -1,13 +1,9 @@
-const path = require('path');
-const getFileContent = require('../helpers/getFileContent');
-
-const cardDataPath = path.join(__dirname, '..', 'data', 'cardData.json');
+const Card = require('../models/card');
 
 function getCards(req, res) {
-  return getFileContent(cardDataPath, res)
-    .then((cards) => {
-      res.status(200).send(cards)
-    });
+  return Card.find({})
+  .then(cards => res.status(200).send(cards))
+  .catch(err => res.status(400).send({ message: 'Error' }));
 }
 
 module.exports = {
