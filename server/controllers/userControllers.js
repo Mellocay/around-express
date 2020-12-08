@@ -7,7 +7,7 @@ function getUsers(req, res) {
 }
 
 function getOneUser(req, res) {
-  return User.findById({ _id: req.params.id })
+  return User.find({ _id: req.params.id })
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: 'No such profile exists' })
@@ -19,13 +19,12 @@ function getOneUser(req, res) {
 
 function createUser(req, res) {
   const { name, about, avatar } = req.body;
-
-    // record data into the database
-    User.create({ name, about, avatar })
-      // return the recorded data to the user
-      .then(user => res.send({ data: user }))
-      // if the data was not recorded, display an error message
-      .catch(err => res.status(500).send({ message: 'Error' }));
+  // record data into the database
+  User.create({ name, about, avatar })
+    // return the recorded data to the user
+    .then((user) => res.status(200).send(user))
+    // if the data was not recorded, display an error message
+    .catch(err => res.status(500).send({ message: err }));
 };
 
 

@@ -13,11 +13,18 @@ app.use(bodyParser.json());
 mongoose.connect('mongodb://localhost:27017/aroundb', {
   useNewUrlParser: true,
   useCreateIndex: true,
-    useFindAndModify: false
+  useFindAndModify: false
 });
 
 //show static page
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  req.user = {
+    _id: '5fcf93367ede1b33d48beb14', // paste the _id of the test user created in the previous step
+  };
+  next();
+});
 
 //connect to routers
 app.use('/', userRouter);
