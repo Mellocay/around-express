@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const app = express();
-const { PORT = 3000 } = process.env;
 const path = require('path');
 const userRouter = require('./routers/users');
 const cardRouter = require('./routers/cards');
+
+const app = express();
+const { PORT = 3000 } = process.env;
 
 app.use(bodyParser.json());
 
@@ -13,10 +14,10 @@ app.use(bodyParser.json());
 mongoose.connect('mongodb://localhost:27017/aroundb', {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
-//show static page
+// show static page
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
@@ -26,11 +27,11 @@ app.use((req, res, next) => {
   next();
 });
 
-//connect to routers
+// connect to routers
 app.use('/', userRouter);
 app.use('/', cardRouter);
 
-//requested page doesn't exist
+// requested page doesn't exist
 app.get('*', (req, res) => {
   res.status(404).send({ message: 'Page not found' });
 });
