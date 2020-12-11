@@ -5,9 +5,9 @@ const {
 
 const userRouter = express.Router();
 
-userRouter.get('/users', getUsers);
-userRouter.get('/users/:id', getOneUser);
-userRouter.post('/users', createUser);
-userRouter.patch('/users/me', updateUser);
+userRouter.get('/', getUsers);
+userRouter.get('/:id', getOneUser);
+userRouter.post('/', createUser);
+userRouter.patch('/me', updateUser);
 
 module.exports = userRouter;

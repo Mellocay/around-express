@@ -4,11 +4,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const userRouter = require('./routers/users');
 const cardRouter = require('./routers/cards');
+const helmet = require('helmet')
 
 const app = express();
 const { PORT = 3000 } = process.env;
 
 app.use(bodyParser.json());
+app.use(helmet());
 
 // connect to the MongoDB server
 mongoose.connect('mongodb://localhost:27017/aroundb', {
@@ -16,9 +18,6 @@ mongoose.connect('mongodb://localhost:27017/aroundb', {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
-// show static page
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   req.user = {
@@ -28,8 +27,8 @@ app.use((req, res, next) => {
 });
 
 // connect to routers
-app.use('/', userRouter);
-app.use('/', cardRouter);
+app.use('/users', userRouter);
+app.use('/cards', cardRouter);
 
 // requested page doesn't exist
 app.get('*', (req, res) => {

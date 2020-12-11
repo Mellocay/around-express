@@ -3,10 +3,10 @@ const { getCards, createCard, deleteCard } = require('../controllers/cardControl
 
 const cardRouter = express.Router();
 
-cardRouter.get('/cards', getCards);
+cardRouter.get('/', getCards);
 
-cardRouter.post('/cards', createCard);
+cardRouter.post('/', createCard);
 
-cardRouter.delete('/cards/:cardId', deleteCard);
+cardRouter.delete('/:cardId', deleteCard);
 
 module.exports = cardRouter;

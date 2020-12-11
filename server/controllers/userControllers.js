@@ -7,7 +7,7 @@ function getUsers(req, res) {
 }
 
 function getOneUser(req, res) {
-  return User.find({ _id: req.params.id })
+  return User.findById(req.params.id)
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: 'No such profile exists' });
@@ -39,8 +39,13 @@ function createUser(req, res) {
 }
 
 const updateUser = (req, res) => {
-  User.findByIdAndUpdate(req.params.id, { name: req.params.name, about: req.params.about })
-    .then((user) => res.status(200).send({ data: user }))
+  User.findByIdAndUpdate(req.params.id, { name: req.params.name, about: req.params.about, avatar: req.params.aatar })
+    .then((user) => {
+      if (!user) {
+        res.status(404).send({ message: err });
+      }
+      res.status(200).send({ data: user })
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         res.status(400).send({ message: err });
