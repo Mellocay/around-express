@@ -21,7 +21,12 @@ const createCard = (req, res) => {
 
 function deleteCard(req, res) {
   Card.findByIdAndRemove(req.params.cardId)
-    .then((card) => res.send({ data: card, message: 'card deleted' }))
+    .then((card) => {
+      if (!card) {
+        res.status(404).send({ message: 'Sorry, that card must be imaginary.  It is not in our system.' });
+      }
+      res.status(200).send({ data: card });
+    })
     .catch((err) => {
       if (err.name === 'CastError') {
         res.status(400).send({ message: err });

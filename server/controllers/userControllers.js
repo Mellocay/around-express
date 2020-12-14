@@ -39,12 +39,18 @@ function createUser(req, res) {
 }
 
 const updateUser = (req, res) => {
-  User.findByIdAndUpdate(req.params.id, { name: req.params.name, about: req.params.about, avatar: req.params.aatar })
+  User.findByIdAndUpdate(
+    req.params.id, {
+      name: req.params.name,
+      about: req.params.about,
+      avatar: req.params.aatar,
+    },
+  )
     .then((user) => {
       if (!user) {
-        res.status(404).send({ message: err });
+        res.status(404).send({ message: 'Imaginary profile detected.  We found no such profile in our system' });
       }
-      res.status(200).send({ data: user })
+      res.status(200).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
